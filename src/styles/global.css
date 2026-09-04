@@ -201,6 +201,24 @@ main .rail:not(.hero) {
   text-align: right;
 }
 
+/* ─── CV page: role detail bullets, and skill/coursework definitions ──────── */
+.entry .bullets {
+  margin-top: 0.5rem;
+  padding-left: 1.05rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+.entry .bullets li { margin-top: 0.3rem; }
+.entry .bullets li::marker { color: var(--faint); }
+
+.def {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0 1.5rem;
+}
+.def-label { font-weight: 500; }
+.def-items { color: var(--muted); font-size: 0.9375rem; }
+
 /* ─── Publications ────────────────────────────────────────────────────────── */
 .pubs { display: flex; flex-direction: column; gap: 1.5rem; }
 .pub .title { font-weight: 500; }
@@ -267,6 +285,8 @@ figcaption {
 
   .entry { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
   .entry .when { text-align: left; order: -1; }
+
+  .def { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
 }
 
 @media (max-width: 26rem) {
