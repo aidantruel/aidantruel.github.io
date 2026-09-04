@@ -21,9 +21,6 @@ export const PROFILES: { label: string; href: string; icon: string }[] = [
   // { label: 'GitHub',      icon: 'github',   href: 'TODO' },
 ];
 
-// Path to the PDF in public/, offered for download at the top of /cv.
-export const CV_PDF = '/cv.pdf';
-
 // Two or three short paragraphs. Plain text; each string is one paragraph.
 export const BIO: string[] = [
   'I am a computational neuroscience master’s student at the Institute of Neuroinformatics, supervised by Professor Timothée Proix.',

@@ -4,21 +4,14 @@ import EntryList from '../components/EntryList.astro';
 import PublicationList from '../components/PublicationList.astro';
 import DefList from '../components/DefList.astro';
 import {
-  SITE, CV_PDF, EDUCATION, EXPERIENCE, PROJECTS,
+  SITE, EDUCATION, EXPERIENCE, PROJECTS,
   PUBLICATIONS, PRESENTATIONS, SKILLS, COURSEWORK, AWARDS,
 } from '../site.config';
-
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <Base title="CV" description={`Curriculum vitae of ${SITE.name}, ${SITE.description.toLowerCase()}.`}>
   <div class="rail hero">
     <div></div>
-    <div>
-      <h1>Curriculum Vitae</h1>
-      <div class="links">
-        <a href={`${base}${CV_PDF}`}>Download PDF</a>
-      </div>
-    </div>
+    <div><h1>Curriculum Vitae</h1></div>
   </div>
 
   <EntryList label="Education" entries={EDUCATION} />
@@ -51,11 +44,4 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <DefList label="Skills" items={SKILLS} />
   <DefList label="Coursework" items={COURSEWORK} />
   <EntryList label="Awards & Achievements" entries={AWARDS} />
-
-  <section class="rail">
-    <div class="section-label">References</div>
-    <div class="prose">
-      <p class="muted">Available on request, and in the <a href={`${base}${CV_PDF}`}>PDF</a>.</p>
-    </div>
-  </section>
 </Base>
