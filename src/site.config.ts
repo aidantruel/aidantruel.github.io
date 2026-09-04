@@ -241,6 +241,7 @@ export const PROJECTS: Project[] = [
     meta: 'Research',
     blurb: 'Examined functional connectivity between Broca’s area and premotor cortex during speech production, using multivariate Granger causality analysis. Found feedforward information flow from dorsal BA44 to BA6v and feedback from ventral BA6v to BA44, alongside a striking dissociation between word and sentence production.',
     links: [
+      { label: 'PDF',    href: 'https://github.com/ETHZMSProjects/ASL_MEA_Functional_Connectivity/blob/main/Broca_s_Functional_Connectivity_Writeup_040725.pdf' },
       { label: 'GitHub', href: 'https://github.com/ETHZMSProjects/ASL_MEA_Functional_Connectivity' },
     ],
   },
