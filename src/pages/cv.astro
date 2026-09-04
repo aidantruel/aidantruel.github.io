@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryList from '../components/EntryList.astro';
+import PublicationList from '../components/PublicationList.astro';
+import DefList from '../components/DefList.astro';
+import {
+  SITE, EDUCATION, EXPERIENCE, PROJECTS,
+  PUBLICATIONS, PRESENTATIONS, SKILLS, COURSEWORK, AWARDS,
+} from '../site.config';
+---
+<Base title="CV" description={`Curriculum vitae of ${SITE.name}, ${SITE.description.toLowerCase()}.`}>
+  <div class="rail hero">
+    <div></div>
+    <div><h1>Curriculum Vitae</h1></div>
+  </div>
+
+  <EntryList label="Education" entries={EDUCATION} />
+  <EntryList label="Experience" entries={EXPERIENCE} detailed />
+
+  {PROJECTS.length > 0 && (
+    <section class="rail">
+      <h2 class="section-label">Projects</h2>
+      <div class="entries">
+        {PROJECTS.map((p) => (
+          <div class="entry">
+            <div class="what">
+              <h3>{p.title}</h3>
+              <p class="note">{p.blurb}</p>
+              {p.links && p.links.length > 0 && (
+                <div class="links">
+                  {p.links.map((l) => <a href={l.href}>{l.label}</a>)}
+                </div>
+              )}
+            </div>
+            {p.meta && <div class="when">{p.meta}</div>}
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <PublicationList label="Publications" items={PUBLICATIONS} />
+  <EntryList label="Presentations" entries={PRESENTATIONS} />
+  <DefList label="Skills" items={SKILLS} />
+  <DefList label="Coursework" items={COURSEWORK} />
+  <EntryList label="Awards & Achievements" entries={AWARDS} />
+</Base>

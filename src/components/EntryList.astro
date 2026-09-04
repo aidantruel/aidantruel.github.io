@@ -4,8 +4,10 @@ import type { Entry } from '../site.config';
 interface Props {
   label: string;
   entries: Entry[];
+  /** Show each entry's `bullets`. Used on the CV page; the About page stays compact. */
+  detailed?: boolean;
 }
-const { label, entries } = Astro.props;
+const { label, entries, detailed = false } = Astro.props;
 
 /** '09/2024 - 10/2026' → '09/2024 – 10/2026' (en dash, as dates are set in print). */
 const dash = (when: string) => when.replace(/\s-\s/g, ' – ');
@@ -20,6 +22,11 @@ const dash = (when: string) => when.replace(/\s-\s/g, ' – ');
             <h3>{e.title}</h3>
             {e.where && <div class="where">{e.where}</div>}
             {e.note && <p class="note">{e.note}</p>}
+            {detailed && e.bullets && e.bullets.length > 0 && (
+              <ul class="bullets">
+                {e.bullets.map((b) => <li>{b}</li>)}
+              </ul>
+            )}
           </div>
           {e.when && <div class="when">{dash(e.when)}</div>}
         </div>

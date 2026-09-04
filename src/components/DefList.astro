@@ -1,0 +1,22 @@
+---
+import type { Definition } from '../site.config';
+
+interface Props {
+  label: string;
+  items: Definition[];
+}
+const { label, items } = Astro.props;
+---
+{items.length > 0 && (
+  <section class="rail">
+    <h2 class="section-label">{label}</h2>
+    <div class="entries">
+      {items.map((d) => (
+        <div class="def">
+          <div class="def-label">{d.label}</div>
+          <div class="def-items">{d.items}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
