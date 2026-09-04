@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryList from '../components/EntryList.astro';
+import PublicationList from '../components/PublicationList.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, PROFILES, BIO, EDUCATION, EXPERIENCE, PUBLICATIONS, AWARDS } from '../site.config';
+---
+<Base title="About">
+  <div class="rail hero">
+    <div></div>
+    <div>
+      <h1>{SITE.name}</h1>
+
+      <div class="profile-links">
+        {PROFILES.map((p) => (
+          <a href={p.href}>
+            <Icon name={p.icon} />
+            {p.label}
+          </a>
+        ))}
+      </div>
+
+      <div class="prose">
+        {BIO.map((para) => <p>{para}</p>)}
+      </div>
+    </div>
+  </div>
+
+  <EntryList label="Education" entries={EDUCATION} />
+  <EntryList label="Experience" entries={EXPERIENCE} />
+  <PublicationList label="Publications" items={PUBLICATIONS} />
+  <EntryList label="Awards & Achievements" entries={AWARDS} />
+</Base>

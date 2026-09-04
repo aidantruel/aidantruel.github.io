@@ -1,0 +1,29 @@
+---
+import type { Entry } from '../site.config';
+
+interface Props {
+  label: string;
+  entries: Entry[];
+}
+const { label, entries } = Astro.props;
+
+/** '09/2024 - 10/2026' → '09/2024 – 10/2026' (en dash, as dates are set in print). */
+const dash = (when: string) => when.replace(/\s-\s/g, ' – ');
+---
+{entries.length > 0 && (
+  <section class="rail">
+    <h2 class="section-label">{label}</h2>
+    <div class="entries">
+      {entries.map((e) => (
+        <div class="entry">
+          <div class="what">
+            <h3>{e.title}</h3>
+            {e.where && <div class="where">{e.where}</div>}
+            {e.note && <p class="note">{e.note}</p>}
+          </div>
+          {e.when && <div class="when">{dash(e.when)}</div>}
+        </div>
+      ))}
+    </div>
+  </section>
+)}

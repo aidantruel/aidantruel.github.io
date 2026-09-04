@@ -1,0 +1,43 @@
+---
+interface Props {
+  url: string;
+  title?: string;
+}
+const { url, title = 'Embedded video' } = Astro.props;
+
+/** Turn a YouTube or Vimeo share link into its privacy-friendly embed URL. */
+function toEmbed(raw: string): string | null {
+  try {
+    const u = new URL(raw);
+    const host = u.hostname.replace(/^www\./, '');
+
+    if (host === 'youtu.be') {
+      return `https://www.youtube-nocookie.com/embed/${u.pathname.slice(1)}`;
+    }
+    if (host.endsWith('youtube.com') || host.endsWith('youtube-nocookie.com')) {
+      const id = u.searchParams.get('v') ?? u.pathname.split('/').pop();
+      return id ? `https://www.youtube-nocookie.com/embed/${id}` : null;
+    }
+    if (host.endsWith('vimeo.com')) {
+      const id = u.pathname.split('/').filter(Boolean).pop();
+      return id ? `https://player.vimeo.com/video/${id}` : null;
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+const src = toEmbed(url);
+---
+{src && (
+  <div class="embed">
+    <iframe
+      src={src}
+      title={title}
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+)}

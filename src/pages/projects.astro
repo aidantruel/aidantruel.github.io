@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
+import { PROJECTS } from '../site.config';
+---
+<Base title="Projects" description="Selected projects, papers and demos.">
+  <div class="rail hero">
+    <div></div>
+    <div><h1>Projects</h1></div>
+  </div>
+
+  {PROJECTS.length === 0 && (
+    <div class="rail">
+      <div class="section-label">Coming soon</div>
+      <div class="prose">
+        <p class="muted">Project write-ups, papers and demos are on their way.</p>
+      </div>
+    </div>
+  )}
+
+  {PROJECTS.map((p) => (
+    <article class="rail project">
+      <div class="section-label">{p.meta}</div>
+      <div>
+        <h2>{p.title}</h2>
+        <p>{p.blurb}</p>
+
+        {p.links && p.links.length > 0 && (
+          <div class="links">
+            {p.links.map((l) => <a href={l.href}>{l.label}</a>)}
+          </div>
+        )}
+
+        {p.video?.startsWith('http') && (
+          <figure>
+            <VideoEmbed url={p.video} title={p.title} />
+            {p.caption && <figcaption>{p.caption}</figcaption>}
+          </figure>
+        )}
+      </div>
+    </article>
+  ))}
+</Base>

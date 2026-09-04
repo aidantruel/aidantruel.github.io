@@ -1,0 +1,39 @@
+---
+import type { Publication } from '../site.config';
+
+interface Props {
+  label: string;
+  items: Publication[];
+}
+const { label, items } = Astro.props;
+
+/** Split an author string on **…** so the author's own name can be bolded. */
+function parts(authors: string) {
+  return authors.split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map((chunk) =>
+    chunk.startsWith('**') && chunk.endsWith('**')
+      ? { text: chunk.slice(2, -2), me: true }
+      : { text: chunk, me: false }
+  );
+}
+---
+{items.length > 0 && (
+  <section class="rail">
+    <h2 class="section-label">{label}</h2>
+    <div class="pubs">
+      {items.map((p) => (
+        <div class="pub">
+          <div class="title">{p.title}</div>
+          <div class="authors">
+            {parts(p.authors).map((c) => (c.me ? <span class="me">{c.text}</span> : c.text))}
+          </div>
+          <div class="venue">{p.venue}{p.year ? `, ${p.year}` : ''}</div>
+          {p.links && p.links.length > 0 && (
+            <div class="links">
+              {p.links.map((l) => <a href={l.href}>{l.label}</a>)}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+)}
