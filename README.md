@@ -54,7 +54,7 @@ In `PROJECTS`, paste the ordinary **share URL** into `video:` —
    | A | `@` | `185.199.109.153` |
    | A | `@` | `185.199.110.153` |
    | A | `@` | `185.199.111.153` |
-   | CNAME | `www` | `<username>.github.io` |
+   | CNAME | `www` | `atruel01.github.io` |
 
    If you use Cloudflare's nameservers, set those records to **DNS only**
    (grey cloud), not proxied — proxying breaks GitHub's certificate issuance.
@@ -63,7 +63,7 @@ In `PROJECTS`, paste the ordinary **share URL** into `video:` —
    once the certificate is issued (can take up to an hour).
 4. Set `site:` in `astro.config.mjs` to the final URL.
 
-### If you use a project repo instead of `<username>.github.io`
+### If you use a project repo instead of `atruel01.github.io`
 
 Uncomment and set `base` in `astro.config.mjs` to `'/<repo-name>'`. Not needed
 with a custom domain or a user site.
